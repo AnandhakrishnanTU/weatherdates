@@ -1,0 +1,45 @@
+import cv2
+import numpy as np
+from tkinter import *
+import tkinter as tk
+from turtle import bgcolor
+from unicodedata import name
+from PIL import ImageTk, Image
+from geopy.geocoders import Nominatim
+from tkinter import ttk,messagebox
+from timezonefinder import TimezoneFinder
+from datetime import datetime
+import requests
+import pytz
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+
+root=tk.Tk()
+root.state('zoomed')
+
+mappage=tk.Frame(root)
+
+
+img=cv2.imread("image.png")
+rows,cols,_=img.shape
+print("rows",rows)
+print("cols",cols)
+cutted_image=img[426:853,0:1280]
+cv2.rectangle(img,(200,60),(1090,500),3)
+roi=img[60:500,200:1090]
+#cv2.imshow("cut image",cutted_image)
+#cv2.imshow("roi",roi)
+#cv2.imshow("image",img)
+cv2.waitKey(0)
+
+map_window=Canvas(mappage,height=1080,width=1920,borderwidth=0,highlightthickness=0,relief="ridge")
+map_window.place(x = 0, y = 0)
+
+map_background=PhotoImage(file="news_background.png")
+background=map_window.create_image(767,400,image=map_background)
+
+background_img = Image.open("roi.png")
+resized = background_img.resize((1100,600), Image.Resampling.LANCZOS)
+new_pic = ImageTk.PhotoImage(resized)
+background=map_window.create_image(755,455,image=new_pic)

@@ -1,0 +1,17 @@
+from tkinter import *
+import tkinter as tk
+from PIL import Image
+
+root=tk.Tk()
+root.state('zoomed')
+
+img_var=Image.open("image.png")
+lft=10
+top=60
+right=210
+botom=300
+
+img_reshaped=img_var.crop((lft,top,right,botom))
+img_reshaped.show()
+
+root.mainloop()
